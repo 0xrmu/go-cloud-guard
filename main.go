@@ -28,6 +28,18 @@ func main() {
 
 	for _, buckets := range result.Buckets {
 		fmt.Println(*buckets.Name)
+
+		result2, err2 := s3client.GetPublicAccessBlock(ctx, &s3.GetPublicAccessBlockInput{
+			Bucket: buckets.Name,
+		})
+		if err2 != nil {
+			panic(err2)
+		}
+
+		pab := result2.PublicAccessBlockConfiguration
+		if !*pab.BlockPublicAcls || !*pab.BlockPublicPolicy || !*pab.IgnorePublicAcls || !*pab.RestrictPublicBuckets {
+			fmt.Println("NOT PROTECTED:", *buckets.Name)
+		}
 	}
 
 	result1, err1 := ec2client.DescribeSecurityGroups(ctx, &ec2.DescribeSecurityGroupsInput{})
@@ -44,4 +56,5 @@ func main() {
 			}
 		}
 	}
+
 }
