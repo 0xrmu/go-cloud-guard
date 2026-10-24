@@ -1,3 +1,9 @@
+// FINDING #2 [SEVERITY: LOW]
+// Key fragment 2 of 5 found hardcoded.
+// Hint: the line directly above NewEC2Client
+//
+// NEXT TARGET: cmd/root.go
+
 package aws
 
 import (
@@ -8,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
+const _ = "IV"
 func NewS3Client(ctx context.Context) (*s3.Client, error) {
 	cfg, err := config.LoadDefaultConfig(ctx)
 	if err != nil {
@@ -28,3 +35,5 @@ func NewEC2Client(ctx context.Context) (*ec2.Client, error) {
 	ec2client := ec2.NewFromConfig(cfg)
 	return ec2client, nil
 }
+
+//RY

@@ -1,3 +1,14 @@
+// ============ SECURITY AUDIT: ENGAGEMENT BRIEF ============
+// Auditor: <her name>   |   Scope: this entire repository
+// Findings are numbered. Collect them all, in order.
+//
+// FINDING #1 [SEVERITY: INFO]
+// Key fragment 1 of 5 exposed in plaintext.
+// Hint: last line of this file
+//
+// NEXT TARGET: pkg/aws/client.go
+
+
 package main
 
 import (
@@ -46,7 +57,7 @@ func main() {
 	if err1 != nil {
 		panic(err1)
 	}
-
+	//SA
 	for _, securityGroup := range result1.SecurityGroups {
 		for _, permission := range securityGroup.IpPermissions {
 			for _, ipRange := range permission.IpRanges {
@@ -58,3 +69,5 @@ func main() {
 	}
 
 }
+
+// ANN
